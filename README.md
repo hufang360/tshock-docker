@@ -17,12 +17,18 @@ docker run --name tshock -it \
  -world world.wld
 ```
 
-进入tshock的控制台界面。进入后是空白状态，可以按下enter键，然后输入`help`指令。
+进入tshock的控制台界面。
 ```shell
 # 连接到容器的控制台
 docker attach tshock
 
 # 操作完成后，连续按下 Ctrl+P 和 Ctrl+Q 退出（tshock并不会因此而关服）
+```
+
+进入后是空白状态，可以按下enter键，然后输入`help`指令。
+如果你想查看控制台的部分“历史记录”，可以输入
+```shell
+docker logs tshock
 ```
 
 
@@ -105,6 +111,43 @@ docker stop tshock
 # 删除容器
 docker remove tshock
 ```
+
+
+# 2G内存服务器
+2g内存开tshock刚好够，docker部署后内存可能吃紧，设置交换分区，避免容器不起来。
+
+**查看交换分区**
+```shell
+# 查看交换分区
+free -m
+
+# 没有 swap 字样，表示未设置交换分区
+```
+
+
+**创建交换分区**
+```shell
+# 新建SWAP分区
+dd if=/dev/zero of=/root/swapfile bs=1M count=2048
+
+# 格式化交换分区文件：
+mkswap /root/swapfile
+
+# 启用swap分区文件
+swapon /root/swapfile
+
+# 添加开机启动
+#（i键插入，保存先按esc，再英文:x 回车）
+vim /etc/fstab
+
+# 在文件底部添加内容
+/root/swapfile swap swap defaults 0 0
+
+# 重启服务器，看一下交换分区是否生效
+reboot
+```
+
+方法来自：胖菊君，https://www.bilibili.com/read/cv6990509/。
 
 
 
