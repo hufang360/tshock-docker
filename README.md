@@ -12,6 +12,7 @@ docker load -i ./tshock-5.2.tar
 ```shell
 docker run --name tshock -it \
  -p 7777:7777 \
+ -e TZ=Asia/Shanghai \
  -d tshock:5.2 \
  -lang 7 \
  -world world.wld
@@ -73,6 +74,7 @@ docker run --name tshock -it \
  -v /opt/S1/tshock:/tshock \
  -v /opt/S1/worlds:/worlds \
  -v /opt/S1/plugins:/plugins \
+ -e TZ=Asia/Shanghai \
  -d tshock:5.2 \
  -lang 7
 ```
@@ -94,6 +96,7 @@ docker run --name tshock -it \
  -v /opt/S1/tshock:/tshock \
  -v /opt/S1/worlds:/worlds \
  -v /opt/S1/plugins:/plugins \
+ -e TZ=Asia/Shanghai \
  -d tshock:5.2 \
  -lang 7 \
  -world /worlds/world.wld
