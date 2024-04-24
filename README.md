@@ -10,11 +10,19 @@ docker load -i ./tshock-5.2.tar
 
 内置了一张空白地图，启动后会自动加载地图，并开服。
 ```shell
-docker run --name tshock -t \
+docker run --name tshock -it \
  -p 7777:7777 \
  -d tshock:5.2 \
  -lang 7 \
  -world world.wld
+```
+
+进入tshock的控制台界面。进入后是空白状态，可以按下enter键，然后输入`help`指令。
+```shell
+# 连接到容器的控制台
+docker attach tshock
+
+# 操作完成后，连续按下 Ctrl+P 和 Ctrl+Q 退出（tshock并不会因此而关服）
 ```
 
 
@@ -54,7 +62,7 @@ docker cp config.json tshock:/tshock
 对于泰拉玩家，一个流程结束后，会再开一个流程。此时更换本地文件即可新开流程。
 先上运行代码：
 ```
-docker run --name tshock -t \
+docker run --name tshock -it \
  -p 7777:7777 \
  -v /opt/S1/tshock:/tshock \
  -v /opt/S1/worlds:/worlds \
@@ -75,7 +83,7 @@ docker run --name tshock -t \
 先将你的地图 拷贝到 `/opt/S1/worlds`，并命名为 `world.wld`。
 然后执行一下指令：
 ```
-docker run --name tshock -t \
+docker run --name tshock -it \
  -p 7777:7777 \
  -v /opt/S1/tshock:/tshock \
  -v /opt/S1/worlds:/worlds \
