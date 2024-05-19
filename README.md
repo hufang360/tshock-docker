@@ -1,4 +1,9 @@
-![](./assets/tshock-docker.png)
+<p align="center">
+  <img src="assets/tshock-docker.png" height="128">
+  <h1 align="center">tshock-docker</h1>
+  <p>tshock5.2 docker版本，内置了一张空白地图，更适合国人体质。</p>
+</p>
+
 # 使用
 
 ### 快速启动
