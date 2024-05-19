@@ -1,22 +1,18 @@
-
+！[](./assets/tshock-docker.png)
 # 使用
 
 ### 快速启动
-将镜像文件拷贝到服务器，然后执行docker导入指令，例如`tshock-5.2.tar`，镜像导入一次即可。
 ```shell
-docker load -i ./tshock-5.2.tar
-```
+docker pull hufang360/tshock:5.2
 
-
-内置了一张空白地图，启动后会自动加载地图，并开服。
-```shell
 docker run --name tshock -it \
  -p 7777:7777 \
  -e TZ=Asia/Shanghai \
- -d tshock:5.2 \
+ -d hufang360/tshock:5.2 \
  -lang 7 \
  -world world.wld
 ```
+内置了一张空白地图，启动后会自动加载地图，并开服。
 
 进入tshock的控制台界面。
 ```shell
@@ -75,7 +71,7 @@ docker run --name tshock -it \
  -v /opt/S1/worlds:/worlds \
  -v /opt/S1/plugins:/plugins \
  -e TZ=Asia/Shanghai \
- -d tshock:5.2 \
+ -d hufang360/tshock:5.2 \
  -lang 7
 ```
 
@@ -97,7 +93,7 @@ docker run --name tshock -it \
  -v /opt/S1/worlds:/worlds \
  -v /opt/S1/plugins:/plugins \
  -e TZ=Asia/Shanghai \
- -d tshock:5.2 \
+ -d hufang360/tshock:5.2 \
  -lang 7 \
  -world /worlds/world.wld
 ```
@@ -167,3 +163,8 @@ docker buildx build --platform linux/amd64 -t tshock:5.2 .
 docker save -o ./tshock-5.2.tar tshock:5.2
 ```
 
+同时打包`amd64`和`arm64`，并发布到dockerhub上。
+```shell
+docker buildx create --use
+docker buildx build --platform linux/amd64,linux/arm64 -t hufang360/tshock:5.2 --push .
+```
