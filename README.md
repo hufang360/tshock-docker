@@ -1,4 +1,4 @@
-！[](./assets/tshock-docker.png)
+![](./assets/tshock-docker.png)
 # 使用
 
 ### 快速启动
